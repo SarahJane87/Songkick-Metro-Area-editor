@@ -1,0 +1,60 @@
+		arr = <%=raw @markers%>;
+		var markers = [];
+		redblank = new google.maps.MarkerImage('images/blank.png');
+		var red1 = new google.maps.MarkerImage('images/marker1.png');
+		var red2 = new google.maps.MarkerImage('images/marker2.png');
+		for (var i=0; i < arr.length; i++)
+  		{	var title = arr[i].metroid.toString() + "," + arr[i].name;
+  			var marker = new google.maps.Marker({position: new google.maps.LatLng(arr[i].latitude,arr[i].longitude), icon: redblank, title: title});
+        	markers.push(marker);
+        	addInfowindow(marker);
+        	select(marker);
+        }
+		var mcOptions = {maxZoom: 7};
+		markerCluster = new MarkerClusterer(map, markers, mcOptions);
+		
+		function addInfowindow(marker) {    
+    		google.maps.event.addListener(marker, "mouseover", function() {
+    			var contentarray = marker.title.split(",")
+      			var infowindow = new google.maps.InfoWindow({content: contentarray[1] + "<br>Metro ID: " + contentarray[0]});
+      			infowindow.open(map, marker);
+      			google.maps.event.addListener(marker, "mouseout", function() {
+      				infowindow.close();
+      			});
+			});
+		}
+	
+		function index (object, array) {
+			for (var i=0; i < array.length; i++) {
+				if (array[i].metroid == object.metroid)
+					return i;
+			}
+		}
+	
+		function select(marker) {
+			google.maps.event.addListener(marker, "click", function() {
+				var contentarray = marker.title.split(",")
+				var info = new Object();
+				info.metroid = contentarray[0];
+				info.name = contentarray[1];				
+				if (marker.getIcon() == redblank) {
+					victims.push(info);
+					victimMarkerArray.push(marker);
+					marker.setIcon(red2);
+					}
+				else if (marker.getIcon() == red2) {
+					var n = index(info, victims);
+					victims.splice(n,1);
+					victimMarkerArray.splice(n,1);
+					surviver.push(info);
+					surviverMarkerArray.push(marker);
+					marker.setIcon(red1);
+					}		
+				else if (marker.getIcon() == red1) {
+					var n = index(info,surviver);
+					marker.setIcon(redblank);
+					surviver.splice(n,1);
+					surviverMarkerArray.splice(n,1);
+					}
+			});
+		}

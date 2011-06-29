@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  metroid: 1
+  name: MyString
+  address: MyString
+  latitude: 1.5
+  longitude: 1.5
+  gmaps: false
+
+two:
+  metroid: 1
+  name: MyString
+  address: MyString
+  latitude: 1.5
+  longitude: 1.5
+  gmaps: false
+
+# == Schema Information
+#
+# Table name: locations
+#
+#  id         :integer         not null, primary key
+#  metroid    :integer
+#  name       :string(255)
+#  address    :string(255)
+#  latitude   :float
+#  longitude  :float
+#  gmaps      :boolean
+#  created_at :datetime
+#  updated_at :datetime
+#
+

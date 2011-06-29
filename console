@@ -1,0 +1,36 @@
+Script started on Wed Jun 15 18:17:51 2011
+bash-3.2$ Locastions[K[K[K[K[K[Ktion.all
+bash: Location.all: command not found
+bash-3.2$ puts l[K:pca[K[K[K[KLocation.all
+bash: puts: command not found
+bash-3.2$ >> Location.all
+bash-3.2$ 
+bash-3.2$ 
+bash-3.2$ rails bdconsole
+^[[A^C/Library/Ruby/Site/1.8/rubygems/package.rb: Interrupt
+	from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:29:in `gem_original_require'
+	from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:29:in `require'
+	from /Library/Ruby/Site/1.8/rubygems/format.rb:7
+	from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:29:in `gem_original_require'
+	from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:29:in `require'
+	from /Library/Ruby/Site/1.8/rubygems/installer.rb:7
+	from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:29:in `gem_original_require'
+	from /Library/Ruby/Site/1.8/rubygems/custom_require.rb:29:in `require'
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler/source.rb:3
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler/dsl.rb:14:in `initialize'
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler/dsl.rb:6:in `new'
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler/dsl.rb:6:in `evaluate'
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler/definition.rb:17:in `build'
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler.rb:136:in `definition'
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler.rb:124:in `load'
+	from /Library/Ruby/Gems/1.8/gems/bundler-1.0.10/lib/bundler.rb:107:in `setup'
+	from /Users/sarahskeete/Documents/rails/metro/config/boot.rb:8
+	from script/rails:5:in `require'
+	from script/rails:5
+
+bash-3.2$ dbconsole
+
+bash: dbconsole: command not found
+bash-3.2$ 
+bash-3.2$ 
+bash-3.2$ 

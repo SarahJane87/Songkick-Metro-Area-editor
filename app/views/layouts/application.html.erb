@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" /> 
+<title>Metro Areas</title> 
+<%= stylesheet_link_tag :all %>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<%= javascript_include_tag :all %>
+
+<script type="text/javascript"> 
+	
+    function initialize() {
+ 		geocoder = new google.maps.Geocoder();
+ 		
+        map = new google.maps.Map(document.getElementById('map_canvas'), {
+			zoom: 3,
+			center: new google.maps.LatLng(37.4419, -122.1419),
+			scaleControl: true,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+  	<%=raw yield%>
+  	
+	}
+
+var map;
+var victims = [];
+var surviver = [];
+var victimMarkerArray = [];
+var surviverMarkerArray = [];
+var vicindexarray = [];
+var surindexarray = [];
+var markerCluster;
+var redblank;
+var text;
+	
+function codeAddress() {
+		var address = document.getElementById("address").value;
+    	geocoder.geocode( { 'address': address}, function(results, status) {
+      		if (status == google.maps.GeocoderStatus.OK) {
+        		map.setCenter(results[0].geometry.location);
+        		map.setZoom(9);
+        		var image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+        		var marker = new google.maps.Marker({
+            		map: map,
+           			icon: image,
+            		animation: google.maps.Animation.DROP,
+            		position: results[0].geometry.location
+        		});
+      		} else {
+        		alert("Geocode was not successful for the following reason: " + status);
+      		}
+    	});
+	}
+		
+	function merge() {
+		if (surviver.length > 1 || surviver.length < 1) {
+			alert("You must have one surviver. You have " + surviver.length.toString() + "!");
+		} else {
+			var victimsNames = "";
+			for (var i=0; i < victims.length; i++) {
+				if (i + 1 == victims.length)
+					victimsNames = victimsNames + victims[i].name;
+				else
+					victimsNames = victimsNames + victims[i].name + " + ";
+			}
+			
+			var answer = confirm("Are you sure you want to merge " + victimsNames + " into " + surviver[0].name + "?");
+			if (answer){
+				for (var i=0; i < victims.length; i++) {
+        			new Ajax.Request('locations/mergemetros', {asynchronous:true, evalScripts:true, 
+        				method:'post', parameters: 'survivermetroid=' + surviver[0].metroid + '&victimmetroid=' + victims[i].metroid,
+        				onFailure: function(transport) {alert('Failed to merge');}
+        			});
+        			new Ajax.Request('/locations/deletevictim', {asynchronous:true, evalScripts:true,
+        				method:'post', parameters:'metroid=' + victims[i].metroid,
+        				onFailure: function(transport) {alert('Merged on Songkick database but failed to merge on app database');}
+        			});
+        			markerCluster.removeMarker(victimMarkerArray[i]);
+        		}
+        		surviverMarkerArray[0].setIcon(redblank);
+				victims = [];
+				surviver = [];
+				victimMarkerArray = [];
+				surviverMarkerArray = [];
+			}
+			else{
+				return;
+			}
+        }
+	}
+	
+
+	
+	
+	
+</script>
+
+</head>
+<body onload="initialize()"> 
+	<div id='actions'>
+	<table style="width:100%">
+	<td style="text-align:left"><input type="button" value="Merge!" style="font-size: 16px" onclick="merge()"></td>
+	<td style="text-align:right"><input id="address" type="textbox" style="outline: none; font-size: 14px; border: none; width: 300px" value="Address">
+	<input type="button" value="Find Address" style="font-size: 16px" onclick="codeAddress()"></td>
+	</table>
+	</div>
+	<div id="map_canvas"></div>
+</body>
+</html>

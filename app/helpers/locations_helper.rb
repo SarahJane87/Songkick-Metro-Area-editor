@@ -1,0 +1,4 @@
+module LocationsHelper
+
+
+end
