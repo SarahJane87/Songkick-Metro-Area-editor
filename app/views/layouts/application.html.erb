@@ -14,8 +14,9 @@
  		
         map = new google.maps.Map(document.getElementById('map_canvas'), {
 			zoom: 3,
-			center: new google.maps.LatLng(37.4419, -122.1419),
+			center: new google.maps.LatLng(51.527709, -0.079963),
 			scaleControl: true,
+			mapTypeControl: false,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
@@ -98,13 +99,13 @@ function codeAddress() {
 
 </head>
 <body onload="initialize()"> 
-	<div id='actions'>
-	<table style="width:100%">
-	<td style="text-align:left"><input type="button" value="Merge!" style="font-size: 16px" onclick="merge()"></td>
-	<td style="text-align:right"><input id="address" type="textbox" style="outline: none; font-size: 14px; border: none; width: 300px" value="Address">
-	<input type="button" value="Find Address" style="font-size: 16px" onclick="codeAddress()"></td>
-	</table>
-	</div>
 	<div id="map_canvas"></div>
+	<div id="search_box">
+	<input id="address" type="textbox" style="outline: none; font-size: 14px; width: 300px; height: 20px; border: none; box-shadow:rgba(0,0,2,0.4) 2px 2px; padding-left:5px;" value="Address">
+	<input type="button" value="Find" style="font-size: 14px; background-color: #3399CC;  color: white; font-weight: bold; border: none; box-shadow:rgba(0,0,2,0.4) 2px 2px;" onclick="codeAddress()">
+	</div>
+	<div id='button'>
+	<input type="button" value="MERGE" style="font-size: 14px; color: #3366CC; font-weight: bold; background-color: white; height: 40px; width: 66px; border-width:1px; box-shadow:rgba(0,0,2,0.4) 1px 1px;" onclick="merge()">
+	</div>
 </body>
 </html>

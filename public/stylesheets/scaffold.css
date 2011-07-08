@@ -8,11 +8,15 @@ html {height: auto;}
 body {margin: 0;}
 
 #map_canvas {
-height: auto; position: absolute; bottom:0px;left:0px; right:0px;top:55px;
+height: auto; position: absolute; bottom:0px;left:0px; right:0px;top:0px;
 }
 
-#actions {
-height: 55px; margin-top: 10px; padding-left: 10px; padding-right: 10px;
+#button {
+height: 45px; width: 75px; position: absolute; top:370px; left:12px;
+}
+
+#search_box {
+height: 45px; width: 360px; position: absolute; top:10px; right:9px;
 }
 
 pre {

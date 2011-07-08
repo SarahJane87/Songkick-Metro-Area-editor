@@ -20,7 +20,7 @@ include LocationsHelper
 	
 	def mergemetros
 		http = Net::HTTP.new("staging.songkick.net")
-		headers ={PRIVATE!}
+		headers ={"Cookie"=>"sk_session=CLASSIFIED!"}
 		resp, d = http.post("/admin/metro_area_merges?return_url='dsf'", "target_metro_area_id=" + params[:survivermetroid] + "&metro_area_id[" + params[:survivermetroid] + "]=on&metro_area_id[" + params[:victimmetroid] + "]=on", headers)
 		render :nothing => true
 		rescue Exception => e
